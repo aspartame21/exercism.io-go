@@ -2,6 +2,9 @@ package raindrops
 
 import "strconv"
 
+// Convert converts a number to a string,
+// the contents of which depend
+// on the number's factors.
 func Convert(num int) string {
 
 	var raindrop string
