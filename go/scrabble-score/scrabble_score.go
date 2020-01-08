@@ -2,40 +2,30 @@ package scrabble
 
 import "strings"
 
+type lettersPointsMap struct {
+	letters string
+	points  int
+}
+
 // Score computes the Scrabble score for given word
 func Score(word string) int {
 
 	score := 0
-
-	OnePointLetters := "AEIOULNRST"
-	TwoPointsLetters := "DG"
-	ThreePointsLetters := "BCMP"
-	FourPointsLetters := "FHVWY"
-	FivePointsLetters := "K"
-	EightPointesLetters := "JX"
-	TenPointsLetters := "QZ"
+	lpm := []lettersPointsMap{
+		{"AEIOULNRST", 1},
+		{"DG", 2},
+		{"BCMP", 3},
+		{"FHVWY", 4},
+		{"K", 5},
+		{"JX", 8},
+		{"QZ", 10},
+	}
 
 	for _, w := range strings.ToUpper(word) {
-		if strings.ContainsRune(OnePointLetters, w) {
-			score++
-		}
-		if strings.ContainsRune(TwoPointsLetters, w) {
-			score += 2
-		}
-		if strings.ContainsRune(ThreePointsLetters, w) {
-			score += 3
-		}
-		if strings.ContainsRune(FourPointsLetters, w) {
-			score += 4
-		}
-		if strings.ContainsRune(FivePointsLetters, w) {
-			score += 5
-		}
-		if strings.ContainsRune(EightPointesLetters, w) {
-			score += 8
-		}
-		if strings.ContainsRune(TenPointsLetters, w) {
-			score += 10
+		for _, mapping := range lpm {
+			if strings.ContainsRune(mapping.letters, w) {
+				score += mapping.points
+			}
 		}
 	}
 
