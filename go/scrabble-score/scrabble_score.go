@@ -1,32 +1,42 @@
 package scrabble
 
-import "strings"
-
-type lettersPointsMap struct {
-	letters string
-	points  int
-}
+import "unicode"
 
 // Score computes the Scrabble score for given word
 func Score(word string) int {
 
 	score := 0
-	lpm := []lettersPointsMap{
-		{"AEIOULNRST", 1},
-		{"DG", 2},
-		{"BCMP", 3},
-		{"FHVWY", 4},
-		{"K", 5},
-		{"JX", 8},
-		{"QZ", 10},
+	lpm := map[rune]int{
+		'A': 1,
+		'E': 1,
+		'I': 1,
+		'O': 1,
+		'U': 1,
+		'L': 1,
+		'N': 1,
+		'R': 1,
+		'S': 1,
+		'T': 1,
+		'D': 2,
+		'G': 2,
+		'B': 3,
+		'C': 3,
+		'M': 3,
+		'P': 3,
+		'F': 4,
+		'H': 4,
+		'V': 4,
+		'W': 4,
+		'Y': 4,
+		'K': 5,
+		'J': 8,
+		'X': 8,
+		'Q': 10,
+		'Z': 10,
 	}
 
-	for _, w := range strings.ToUpper(word) {
-		for _, mapping := range lpm {
-			if strings.ContainsRune(mapping.letters, w) {
-				score += mapping.points
-			}
-		}
+	for _, w := range word {
+		score += lpm[unicode.ToUpper(w)]
 	}
 
 	return score
