@@ -12,9 +12,9 @@ func IsIsogram(word string) bool {
 			continue
 		}
 
-		source := word[0:i] + word[i+1:len(word)]
+		index := strings.IndexRune(word, letter)
 
-		if strings.ContainsRune(source, letter) {
+		if index != i && index != -1 {
 			return false
 		}
 	}
