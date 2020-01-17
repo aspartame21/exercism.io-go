@@ -7,22 +7,11 @@ func Difference(num int) int {
 
 // SquareOfSum returns square of sum of first natural numbers
 func SquareOfSum(num int) int {
-	var res int
-
-	for i := 1; i <= num; i++ {
-		res += i
-	}
-
-	return res * res
+	sum := num * (num + 1) / 2
+	return sum * sum
 }
 
 // SumOfSquares returns sum of squares of first natural numbers
 func SumOfSquares(num int) int {
-	var res int
-
-	for i := 1; i <= num; i++ {
-		res += i * i
-	}
-
-	return res
+	return num * (num + 1) * (2*num + 1) / 6
 }
