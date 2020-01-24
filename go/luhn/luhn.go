@@ -8,19 +8,19 @@ import (
 // Valid checks whether card number is valid or not
 func Valid(cardNum string) bool {
 	// Remove spaces between digit blocks
-	stripped := strings.Replace(cardNum, " ", "", -1)
+	cardNum = strings.Replace(cardNum, " ", "", -1)
 
-	if len(stripped) < 2 {
+	if len(cardNum) < 2 {
 		return false
 	}
 
 	sum := 0
 	odd := 0
-	if len(stripped)%2 != 0 {
+	if len(cardNum)%2 != 0 {
 		odd = 1
 	}
 
-	for i, c := range stripped {
+	for i, c := range cardNum {
 		if !unicode.IsDigit(c) {
 			return false
 		}
@@ -29,11 +29,9 @@ func Valid(cardNum string) bool {
 
 		if i%2 == odd {
 			sum += doubleDigit(digit)
-			continue
+		} else {
+			sum += digit
 		}
-
-		sum += digit
-
 	}
 
 	if sum%10 != 0 {
