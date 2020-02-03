@@ -13,10 +13,6 @@ func Square(num int) (uint64, error) {
 }
 
 func Total() uint64 {
-	var sum uint64 = 0
-	for i := 1; i < 65; i++ {
-		square, _ := Square(i)
-		sum += square
-	}
-	return sum
+	total, _ := Square(65)
+	return total - 1
 }
