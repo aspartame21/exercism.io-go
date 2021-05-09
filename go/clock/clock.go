@@ -2,7 +2,6 @@ package clock
 
 import (
 	"fmt"
-	"strconv"
 )
 
 type Clock struct {
@@ -26,7 +25,7 @@ func (c Clock) Subtract(n int) Clock {
 
 func (c Clock) String() string {
 	c.minutes = normalize(c.minutes)
-	return fmt.Sprintf("%s:%s", format((c.minutes/60)%24), format(c.minutes%60))
+	return fmt.Sprintf("%02d:%02d", c.minutes/60%24, c.minutes%60)
 }
 
 func normalize(minutes int) int {
@@ -35,11 +34,4 @@ func normalize(minutes int) int {
 		minutes += 1440
 	}
 	return minutes
-}
-
-func format(n int) string {
-	if n < 10 {
-		return "0" + strconv.Itoa(n)
-	}
-	return strconv.Itoa(n)
 }
