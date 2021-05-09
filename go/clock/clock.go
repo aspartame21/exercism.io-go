@@ -4,15 +4,15 @@ import (
 	"fmt"
 )
 
-const minutesInAnHour = 60
-const minutesInADay = 24 * minutesInAnHour
+const minutesInHour = 60
+const minutesInADay = 24 * minutesInHour
 
 type Clock struct {
 	minutes int
 }
 
 func New(h, m int) Clock {
-	minutes := (h*minutesInAnHour + m) % minutesInADay
+	minutes := (h*minutesInHour + m) % minutesInADay
 	if minutes < 0 {
 		minutes += minutesInADay
 	}
