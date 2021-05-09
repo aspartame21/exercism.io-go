@@ -4,34 +4,29 @@ import (
 	"fmt"
 )
 
+const minutesInAnHour = 60
+const minutesInADay = 24 * minutesInAnHour
+
 type Clock struct {
 	minutes int
 }
 
 func New(h, m int) Clock {
-	computed := normalize(h*60 + m)
-	return Clock{minutes: computed}
+	minutes := (h*minutesInAnHour + m) % minutesInADay
+	if minutes < 0 {
+		minutes += minutesInADay
+	}
+	return Clock{minutes: minutes}
 }
 
-func (c Clock) Add(n int) Clock {
-	c.minutes = normalize(c.minutes + n)
-	return c
+func (c Clock) Add(m int) Clock {
+	return New(0, c.minutes+m)
 }
 
-func (c Clock) Subtract(n int) Clock {
-	c.minutes = normalize(c.minutes - n)
-	return c
+func (c Clock) Subtract(m int) Clock {
+	return New(0, c.minutes-m)
 }
 
 func (c Clock) String() string {
-	c.minutes = normalize(c.minutes)
-	return fmt.Sprintf("%02d:%02d", c.minutes/60%24, c.minutes%60)
-}
-
-func normalize(minutes int) int {
-	minutes %= 1440
-	if minutes < 0 {
-		minutes += 1440
-	}
-	return minutes
+	return fmt.Sprintf("%02d:%02d", c.minutes/60, c.minutes%60)
 }
